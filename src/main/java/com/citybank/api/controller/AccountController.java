@@ -1,7 +1,8 @@
-package com.safewallet.bank.controller; // pacote para controllers REST
+package com.citybank.api.controller; // pacote para controllers REST
 
-import com.safewallet.bank.dto.AccountDto; // DTO utilizado nas requisições/respostas
-import com.safewallet.bank.service.AccountService; // serviço que contém lógica de negócio
+import com.citybank.api.dto.AccountDto;
+import com.citybank.api.service.AccountService;
+
 import org.springframework.http.ResponseEntity; // utilitário para construir respostas HTTP
 import org.springframework.web.bind.annotation.*; // anotações REST (GetMapping, PostMapping, etc.)
 

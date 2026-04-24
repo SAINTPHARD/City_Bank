@@ -1,4 +1,4 @@
-package com.safewallet.bank.dto; // pacote para objetos de transferência (DTOs)
+package com.citybank.api.dto; // pacote para objetos de transferência (DTOs)
 
 import java.math.BigDecimal; // import para BigDecimal usado no saldo
 import java.util.Objects; // import para equals e hashCode

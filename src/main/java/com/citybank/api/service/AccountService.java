@@ -1,4 +1,4 @@
-package com.safewallet.bank.service; // pacote para serviços (lógica de negócio)
+package com.citybank.api.service; // pacote para serviços (lógica de negócio)
 
 import java.math.BigDecimal;
 import java.util.List; // import para List
@@ -7,9 +7,9 @@ import java.util.stream.Collectors; // import para coletar streams
 
 import org.springframework.stereotype.Service; // anotação para marcar classe de serviço no Spring
 
-import com.safewallet.bank.dto.AccountDto; // DTO usado pelo serviço
-import com.safewallet.bank.entity.Account; // entidade usada pelo serviço
-import com.safewallet.bank.repository.AccountRepository; // repository para persistência
+import com.citybank.api.dto.AccountDto;
+import com.citybank.api.entity.Account;
+import com.citybank.api.repository.AccountRepository;
 
 import jakarta.transaction.Transactional;
 

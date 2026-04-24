@@ -1,4 +1,4 @@
-package com.safewallet.bank.entity; // pacote onde ficam as entidades JPA
+package com.citybank.api.entity; // pacote onde ficam as entidades JPA
 
 import jakarta.persistence.*; // import de anotações JPA (Entity, Table, Id, Column, etc.)
 
