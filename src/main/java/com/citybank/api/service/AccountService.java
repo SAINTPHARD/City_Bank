@@ -130,6 +130,57 @@ public class AccountService { // serviço que implementa a lógica CRUD para acc
         		);
     }
     
-    
+    /**
+     * O método transfer é responsável por realizar a transferência de fundos entre duas contas. Ele é anotado com @Transactional para garantir que todas as operações dentro do método sejam atômicas, ou seja, ou todas são executadas com sucesso ou nenhuma é aplicada em caso de erro. O método realiza as seguintes etapas:
+     * 1. Busca a conta de origem (fromAccount) usando o ID fornecido
+     * 2. Busca a conta de destino (toAccount) usando o ID fornecido
+     * 3. Verifica se a conta de origem tem saldo suficiente para a transferência,
+     *   4. Debita o valor da conta de origem e credita na conta de destino
+     *   5. Salva as contas atualizadas no banco de dados
+     *   6. Registra uma transação do tipo TRANSFER apontando both from
+     *   
+     */
+    public Transaction recordTransfer(Long fromId, Long toId, BigDecimal amount, String description) {
+		// 1. Buscar a conta de origem, senão lançar erro de exceção
+		Account fromAccount = repository.findById(fromId)
+				.orElseThrow(() -> new RuntimeException("Conta não encontrada: " + fromId));
+		
+		// 2. Buscar a conta de destino, senão lançar erro de exceção
+		Account toAccount = repository.findById(toId)
+				.orElseThrow(() -> new RuntimeException("Conta não encontrada: " + toId
+						));
+		
+		// 3. Verificar se a conta de origem tem saldo suficiente, senão lançar erro de exceção
+		if (fromAccount.getBalance().compareTo(amount) < 0) { // compara
+			throw new RuntimeException("Saldo insuficiente para transferencia: " + fromId);
+		}
+		
+		// 4. Se passou na Verificação, então Debitar o valor da conta de origem e salvar
+		fromAccount.setBalance(fromAccount.getBalance().subtract(amount));	// Retira saldo
+		toAccount.setBalance(toAccount.getBalance().add(amount)); 			// Adiciona saldo
+				repository.save(fromAccount); 								// salva a conta de origem atualizada
+				
+		// 5. Criar e salvar o registro da transação(histórico)
+				Transaction tx = transactionService.recordTransaction(
+						fromAccount, 
+						toAccount, 
+						amount, 
+						Transaction.TransactionType.TRANSFER, 
+						description != null ? description : "Transferência entre contas " + fromId + " to " + toId
+						);
+				
+				return tx; // retorna os detalhes da transação registrada
+					}
+    /**
+     * @Transaction tx: É o objeto que representa a transação de transferência que será registrada no banco de dados. Ele contém informações como as contas envolvidas, o valor transferido, o tipo da transação e uma descrição opcional.
+     * Ele é criado usando o método recordTransaction do TransactionService, que recebe os seguintes parâmetros:
+     * 
+     * fromAccount,        // Passa o objeto da conta que está enviando o dinheiro (Débito)
+     * @toAccount,          // Passa o objeto da conta que está recebendo o dinheiro (Crédito)
+     * @amount,             // Define o valor exato que foi movimentado entre elas
+     * @Transaction.TransactionType.TRANSFER, // Define o tipo como 'TRANSFER' (definodo no enum TransactionType)
+     * Se houver uma descrição enviada no Postman, usa ela; caso contrário, gera uma padrão
+     * @description != null ? description : "Transferência entre contas " + fromId + " to " + toId 
+     */
     
 } // fim da classe AccountService
