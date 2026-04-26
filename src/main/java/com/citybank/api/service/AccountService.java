@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 import java.util.List; // import para List
 import java.util.Optional; // import para Optional
 import java.util.stream.Collectors; // import para coletar streams
+import com.citybank.api.repository.AccountRepository; // Garanta que aponta para o pacote novo
 
 import org.springframework.stereotype.Service; // anotação para marcar classe de serviço no Spring
 
 import com.citybank.api.dto.AccountDto;
 import com.citybank.api.entity.Account;
+import com.citybank.api.entity.Transaction;
 import com.citybank.api.repository.AccountRepository;
+import com.citybank.api.service.TransactionService;
 
 import jakarta.transaction.Transactional;
 
@@ -17,9 +20,11 @@ import jakarta.transaction.Transactional;
 public class AccountService { // serviço que implementa a lógica CRUD para accounts
 
     private final AccountRepository repository; // referência ao repository para operações de BD
+    private final TransactionService transactionService; // serviço para registrar transações
 
-    public AccountService(AccountRepository repository) { // construtor com injeção do repository
+    public AccountService(AccountRepository repository, TransactionService transactionService) { // construtor com injeção do repository
         this.repository = repository; // atribui o repository injetado
+        this.transactionService = transactionService;
     }
 
     public AccountDto toDto(Account acc) { // converte entidade Account para AccountDto
@@ -65,6 +70,31 @@ public class AccountService { // serviço que implementa a lógica CRUD para acc
     public void delete(Long id) { // deleta uma conta por id
         repository.deleteById(id); // delega ao repository a remoção
     }
+
+    /** Retorna a entidade Account ou lança RuntimeException se não existir. */
+    public Account findEntityById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Conta não encontrada: " + id));
+    }
+
+    @Transactional
+    public Transaction recordDeposit(Long accountId, BigDecimal amount, String description) {
+        Account account = findEntityById(accountId);
+        account.setBalance(account.getBalance().add(amount));
+        repository.save(account);
+        return transactionService.recordTransaction(null, account, amount, Transaction.TransactionType.CREDIT, description);
+    }
+
+    @Transactional
+    public Transaction recordWithdrawal(Long accountId, BigDecimal amount, String description) {
+        Account account = findEntityById(accountId);
+        if (account.getBalance().compareTo(amount) < 0) {
+            throw new RuntimeException("Saldo insuficiente para saque: " + accountId);
+        }
+        account.setBalance(account.getBalance().subtract(amount));
+        repository.save(account);
+        return transactionService.recordTransaction(account, null, amount, Transaction.TransactionType.DEBIT, description);
+    }
     
     // Método de Transferência de fundos entre contas
     @Transactional // garante que a operação seja atômica (tudo ou nada)
@@ -86,9 +116,18 @@ public class AccountService { // serviço que implementa a lógica CRUD para acc
 		fromAccount.setBalance(fromAccount.getBalance().subtract(amount)); // Retira saldo
         toAccount.setBalance(toAccount.getBalance().add(amount)); // Adiciona saldo
 		
-		// 5. Salvar as duas contas atualizadas no banco de dados
-		repository.save(fromAccount); // salva a conta de origem atualizada
-		repository.save(toAccount); // salva a conta de destino atualizada
+        // 5. Salvar as duas contas atualizadas no banco de dados
+        repository.save(fromAccount); // salva a conta de origem atualizada
+        repository.save(toAccount); // salva a conta de destino atualizada
+
+        // 6. Registrar transação de transferência (aponta both from e to)
+        transactionService.recordTransaction(
+        		fromAccount, 
+        		toAccount, 
+        		amount, 
+        		Transaction.TransactionType.TRANSFER, 
+        		"Transferência entre contas " + fromId + " to " + toId
+        		);
     }
     
     
