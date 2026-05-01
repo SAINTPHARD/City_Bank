@@ -1,4 +1,20 @@
+# Node (React)
 node_modules/
 dist/
-.env
+dist-ssr
+*.local
+
+# Java (Spring Boot)
+target/
+!.mvn/wrapper/maven-wrapper.jar
+build/
+.sts4-cache/
+
+# IDEs e Sistema
+.vscode/
+.idea/
+.settings/
+.classpath
+.project
 *.log
+.DS_Store
