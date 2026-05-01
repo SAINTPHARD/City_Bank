@@ -1,0 +1,41 @@
+.portfolio-panel {
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(18, 54, 47, 0.08);
+}
+
+.portfolio-bars {
+  display: grid;
+  gap: 14px;
+}
+
+.portfolio-bar {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 10px;
+  color: #475851;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.portfolio-bar div {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2ebe7;
+}
+
+.portfolio-bar strong {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #007565, #9ee3c5);
+}
+
+.portfolio-bar em {
+  color: #007565;
+  font-style: normal;
+}

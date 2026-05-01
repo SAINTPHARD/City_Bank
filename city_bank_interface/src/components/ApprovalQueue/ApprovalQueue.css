@@ -1,0 +1,64 @@
+.approval-panel {
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(18, 54, 47, 0.08);
+}
+
+.approval-list {
+  display: grid;
+  gap: 12px;
+}
+
+.approval-item {
+  display: grid;
+  gap: 12px;
+  border: 1px solid #e2ebe7;
+  border-radius: 8px;
+  padding: 14px;
+  background: #ffffff;
+}
+
+.approval-item strong,
+.approval-item p {
+  margin: 0;
+  font-weight: 900;
+}
+
+.approval-item small {
+  display: block;
+  margin-top: 4px;
+  color: #65756f;
+  font-weight: 700;
+}
+
+.approval-item span {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: #795200;
+  background: #fff1c7;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.approval-item__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.approval-item__actions button {
+  min-height: 38px;
+  border: 0;
+  border-radius: 8px;
+  color: #102f2b;
+  background: #9ee3c5;
+  font-weight: 900;
+}
+
+.approval-item__actions button:last-child {
+  color: #007565;
+  background: #e8f5f1;
+}

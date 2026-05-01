@@ -1,0 +1,108 @@
+.account-panel {
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(18, 54, 47, 0.08);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.panel-heading h2 {
+  margin: 4px 0 0;
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.panel-heading button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 16px;
+  color: #007565;
+  background: #e8f5f1;
+  font-weight: 900;
+}
+
+.account-table {
+  display: grid;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.account-table__row {
+  display: grid;
+  grid-template-columns: minmax(230px, 1.7fr) 0.8fr 1fr 0.55fr 0.7fr 0.75fr;
+  align-items: center;
+  gap: 14px;
+  min-width: 820px;
+  border: 1px solid #e2ebe7;
+  border-radius: 8px;
+  padding: 13px 14px;
+  background: #ffffff;
+}
+
+.account-table__row--head {
+  border: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: #5d6d68;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.account-table strong {
+  font-weight: 900;
+}
+
+.account-table small {
+  display: block;
+  margin-top: 4px;
+  color: #65756f;
+  font-weight: 700;
+}
+
+.risk-badge,
+.status-badge {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.risk-badge--baixo {
+  color: #006b5f;
+  background: #dcf8ed;
+}
+
+.risk-badge--médio {
+  color: #795200;
+  background: #fff1c7;
+}
+
+.risk-badge--alto {
+  color: #a23c38;
+  background: #ffe0df;
+}
+
+.status-badge {
+  color: #1f4172;
+  background: #edf4ff;
+}
+
+@media (max-width: 680px) {
+  .panel-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,40 @@
+.activity-panel {
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(18, 54, 47, 0.08);
+}
+
+.activity-list {
+  display: grid;
+  gap: 14px;
+}
+
+.activity-item {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.activity-item > span {
+  width: 10px;
+  height: 10px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #007565;
+  box-shadow: 0 0 0 5px #dcf8ed;
+}
+
+.activity-item strong {
+  display: block;
+  font-weight: 900;
+}
+
+.activity-item small {
+  display: block;
+  margin-top: 4px;
+  color: #65756f;
+  font-weight: 700;
+}
