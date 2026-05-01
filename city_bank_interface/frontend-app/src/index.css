@@ -1,69 +1,132 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --primary-dark: #061e1d;
+  /* Verde escuro do Dashboard */
+  --accent-green: #10b981;
+  /* Verde das métricas */
+  --bg-light: #f1f5f9;
+  --white: #ffffff;
+  --text-main: #1e293b;
 }
 
 body {
   margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-main);
+}
+
+/* Layout Estrutural */
+.app-shell {
   display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Sidebar Estilizada */
+.sidebar {
+  width: 260px;
+  background-color: var(--primary-dark);
+  color: white;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
-button {
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.brand-mark {
+  background: var(--accent-green);
+  color: var(--primary-dark);
+  padding: 8px;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-weight: bold;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.nav-list a {
+  display: block;
+  padding: 12px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.nav-list a.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-green);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 40px;
+}
+
+/* Hero Panel (Saldo) */
+.hero-panel {
+  background: var(--white);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+  border-left: 6px solid var(--accent-green);
+}
+
+.hero-panel h2 {
+  font-size: 2.5rem;
+  margin: 8px 0;
+  color: var(--primary-dark);
+}
+
+/* Cards de Contas */
+.account-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.account-card {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.account-card.active {
+  border-color: var(--accent-green);
+  background: #f0fdf4;
+}
+
+/* Transações */
+.panel {
+  background: var(--white);
+  padding: 24px;
+  border-radius: 16px;
+  margin-top: 24px;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.income {
+  color: var(--accent-green);
+  font-weight: bold;
+}
+
+.expense {
+  color: #ef4444;
+  font-weight: bold;
 }
