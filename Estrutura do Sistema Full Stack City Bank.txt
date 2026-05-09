@@ -1,0 +1,49 @@
+Construção de uma plataforma bancária robusta dividida em três grandes camadas principais
+
+1) Estrutura do Sistema Full Stack City Bank
+
+Estrutura do Sistema Full Stack City Bank
+1. O Backend (O Cérebro)
+É o projeto API que você está desenvolvendo no STS (Spring Tool Suite).
+
+
+Tecnologia: Java 21 com Spring Boot 3.
+
+
+Função: Ele é o único que conversa com o Banco de Dados MySQL (citybank). Ele contém as regras de negócio: quem pode transferir, como validar um boleto e como calcular saldos.
+
+
+Repositórios atuais: Já identificamos o de Contas e o de Transações.
+
+2. O Dashboard Gerencial (Visão Administrativa)
+É a tela que você mostrou no último print ("Carteira de contas da agência").
+
+
+Perfil de Usuário: Funcionários do banco (Gerentes de conta).
+
+Função: Visão macro. O gerente usa isso para ver o risco das contas, aprovar limites empresariais e monitorar atividades recentes de toda a agência.
+
+3. O Internet Banking (Visão do Cliente)
+É a primeira tela que você nos mostrou, onde o "Roberto" vê o próprio saldo de R$ 45.740,95.
+
+
+Perfil de Usuário: O cliente final (correntista).
+
+Função: Visão micro. Onde o usuário faz Pix, paga boletos e vê seus investimentos.
+
+❓ "Se uma pessoa quiser criar uma conta, por onde ela vai?"
+Em um projeto real de banco digital, esse fluxo geralmente acontece em uma quarta interface: o Site Institucional ou a Tela de Onboarding.
+
+O Fluxo de Criação de Conta:
+Onde construir: Você criaria uma nova página no seu frontend (usando React, Angular ou HTML puro) chamada Cadastro ou Abra sua Conta.
+
+Como funciona a interação:
+
+O usuário preenche um formulário (Nome, CPF, E-mail).
+
+O Frontend envia esses dados para o seu Backend (STS) através de um comando POST /api/usuarios.
+
+O Backend valida os dados e cria uma nova linha na tabela accounts do MySQL.
+
+
+Resultado: Após a criação, o novo usuário já apareceria automaticamente no Dashboard Gerencial para o gerente acompanhar e ele conseguiria fazer login no Internet Banking.
