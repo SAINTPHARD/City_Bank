@@ -1,7 +1,9 @@
 export const kpis = [
   {
     label: "Carteira total",
-    value: "R$ 128,7 mi",
+    value: 128700000,
+    type: "currency",
+    isSensitive: true,
     detail: "1.248 contas ativas",
     trend: "+12,4%"
   },
@@ -31,7 +33,7 @@ export const accounts = [
     manager: "Roberto Lima",
     client: "Mariana Costa",
     segment: "Premium",
-    balance: "R$ 842.750,90",
+    balance: 842750.9,
     products: 7,
     risk: "Baixo",
     status: "Ativa"
@@ -41,7 +43,7 @@ export const accounts = [
     manager: "Roberto Lima",
     client: "Construtora Atlas LTDA",
     segment: "PJ",
-    balance: "R$ 3.480.210,30",
+    balance: 3480210.3,
     products: 11,
     risk: "Médio",
     status: "Revisão"
@@ -51,7 +53,7 @@ export const accounts = [
     manager: "Ana Torres",
     client: "Felipe Andrade",
     segment: "Digital",
-    balance: "R$ 58.920,14",
+    balance: 58920.14,
     products: 4,
     risk: "Baixo",
     status: "Ativa"
@@ -61,7 +63,7 @@ export const accounts = [
     manager: "Roberto Lima",
     client: "Grupo Horizonte",
     segment: "Corporate",
-    balance: "R$ 12.710.889,00",
+    balance: 12710889,
     products: 16,
     risk: "Alto",
     status: "Restrição"
@@ -71,7 +73,7 @@ export const accounts = [
     manager: "Clara Mendes",
     client: "Sofia Nascimento",
     segment: "Private",
-    balance: "R$ 4.231.005,60",
+    balance: 4231005.6,
     products: 13,
     risk: "Baixo",
     status: "Ativa"

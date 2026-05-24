@@ -1,0 +1,77 @@
+.report-center {
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 14px 30px rgba(18, 54, 47, 0.07);
+}
+
+.report-center .panel-heading button {
+  color: #ffffff;
+  background: #007565;
+}
+
+.report-center__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.72fr);
+  gap: 14px;
+}
+
+.report-upload,
+.report-status {
+  display: grid;
+  gap: 8px;
+  border: 1px dashed #9bc8bb;
+  border-radius: 8px;
+  padding: 18px;
+  background: #f7fbfa;
+}
+
+.report-upload {
+  cursor: pointer;
+}
+
+.report-upload span,
+.report-status span {
+  color: #007565;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.report-upload strong,
+.report-status strong {
+  color: #102f2b;
+  font-size: 1rem;
+}
+
+.report-upload input {
+  max-width: 100%;
+  color: #475851;
+}
+
+.report-status {
+  border-style: solid;
+  background: #ffffff;
+}
+
+.report-status small {
+  color: #65756f;
+  font-weight: 700;
+}
+
+@media print {
+  .manager-sidebar,
+  .manager-header__actions,
+  .report-center,
+  .manager-login {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .report-center__grid {
+    grid-template-columns: 1fr;
+  }
+}

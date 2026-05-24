@@ -1,17 +1,18 @@
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .kpi-card {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   border: 1px solid #d8e4df;
   border-radius: 8px;
-  padding: 18px;
+  min-width: 0;
+  padding: 18px 18px 16px;
   background: #ffffff;
-  box-shadow: 0 16px 36px rgba(18, 54, 47, 0.08);
+  box-shadow: 0 14px 30px rgba(18, 54, 47, 0.07);
 }
 
 .kpi-card p {
@@ -23,12 +24,41 @@
   letter-spacing: 0.08em;
 }
 
-.kpi-card strong {
-  font-size: clamp(1.55rem, 3vw, 2.15rem);
-  line-height: 1;
+.kpi-card__value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
 }
 
-.kpi-card div {
+.kpi-card__value strong {
+  min-width: 0;
+  overflow: hidden;
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  line-height: 1.08;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kpi-card__visibility {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #cfe0db;
+  border-radius: 8px;
+  color: #006b5f;
+  background: #f7fbfa;
+}
+
+.kpi-card__visibility:hover {
+  color: #ffffff;
+  background: #007565;
+}
+
+.kpi-card > div:last-child {
   display: flex;
   justify-content: space-between;
   gap: 12px;
@@ -37,8 +67,12 @@
   font-weight: 800;
 }
 
+.kpi-card > div:last-child span {
+  min-width: 0;
+}
+
 .kpi-card em {
-  color: #007565;
+  color: #00835f;
   font-style: normal;
 }
 

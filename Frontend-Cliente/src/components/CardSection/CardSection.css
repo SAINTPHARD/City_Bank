@@ -1,0 +1,142 @@
+.card-section {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 50px;
+  align-items: center;
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding: 70px clamp(16px, 3vw, 32px) 96px;
+}
+
+.card-section .section-heading p {
+  margin: 0 0 16px;
+  color: #10a6a6;
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.card-section .section-heading h2 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 900;
+  line-height: 1.04;
+}
+
+.card-section .section-heading > span {
+  display: block;
+  max-width: 470px;
+  margin-top: 20px;
+  color: #52616f;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.card-section .primary-pill {
+  width: fit-content;
+  margin-top: 28px;
+}
+
+.floating-cards {
+  position: relative;
+  min-height: 430px;
+}
+
+.credit-card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 235px;
+  height: 330px;
+  padding: 30px;
+  color: #fff;
+  background: linear-gradient(145deg, #0b6e75, #062a40 62%, #041826);
+  border-radius: 14px;
+  box-shadow: 0 28px 44px rgba(5, 57, 70, 0.28);
+}
+
+.credit-card-front {
+  top: 90px;
+  left: 12%;
+  z-index: 2;
+  transform: rotate(7deg);
+}
+
+.credit-card-back {
+  top: 28px;
+  left: 44%;
+  background: linear-gradient(145deg, #c99f37, #0b6e75 72%);
+  transform: rotate(-7deg);
+}
+
+.brand-circles,
+.chip {
+  display: block;
+}
+
+.brand-circles {
+  position: relative;
+  width: 58px;
+  height: 28px;
+}
+
+.brand-circles::before,
+.brand-circles::after {
+  position: absolute;
+  top: 3px;
+  width: 24px;
+  height: 24px;
+  content: "";
+  border-radius: 50%;
+}
+
+.brand-circles::before {
+  left: 0;
+  background: #c99f37;
+}
+
+.brand-circles::after {
+  left: 18px;
+  background: #9be0d8;
+}
+
+.chip {
+  width: 40px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 6px;
+}
+
+.credit-card span:last-child {
+  font-size: 38px;
+  font-weight: 900;
+}
+
+@media (max-width: 980px) {
+  .card-section {
+    grid-template-columns: 1fr;
+  }
+
+  .floating-cards {
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 640px) {
+  .credit-card {
+    width: 170px;
+    height: 250px;
+    padding: 22px;
+  }
+
+  .credit-card-front {
+    left: 6%;
+  }
+
+  .credit-card-back {
+    left: 42%;
+  }
+}

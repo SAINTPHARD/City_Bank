@@ -1,0 +1,73 @@
+/* Define o container principal da pagina de cadastro. */
+.register-page {
+  display: grid; /* Organiza texto e formulario lado a lado no desktop. */
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 460px); /* Mantem formulario com largura confortavel. */
+  gap: clamp(28px, 6vw, 72px); /* Cria respiro responsivo entre as colunas. */
+  align-items: center; /* Centraliza verticalmente o conteudo. */
+  min-height: calc(100vh - 68px); /* Ocupa a tela abaixo do Header. */
+  padding: clamp(36px, 7vw, 92px); /* Aplica margem interna responsiva. */
+  background: linear-gradient(135deg, #eef7f8, #f7fbfc); /* Usa fundo claro e suave para transmitir confianca. */
+}
+
+/* Estiliza o texto de apoio da abertura de conta. */
+.register-copy {
+  max-width: 620px; /* Evita linhas longas demais. */
+}
+
+/* Estiliza o selo acima do titulo. */
+.register-copy span {
+  color: #16858c; /* Usa a cor principal suavizada. */
+  font-size: 14px; /* Mantem o selo discreto. */
+  font-weight: 900; /* Destaca a categoria da pagina. */
+  text-transform: uppercase; /* Cria consistencia com secoes da home. */
+}
+
+/* Estiliza o titulo principal da pagina. */
+.register-copy h1 {
+  margin: 14px 0 18px; /* Separa titulo do selo e do texto. */
+  color: #101820; /* Mantem contraste alto. */
+  font-size: clamp(40px, 6vw, 68px); /* Ajusta titulo em telas diferentes. */
+  line-height: 1; /* Mantem impacto visual sem altura excessiva. */
+}
+
+/* Estiliza a descricao da pagina. */
+.register-copy p {
+  max-width: 460px; /* Melhora leitura do paragrafo. */
+  margin: 0; /* Remove margem padrao. */
+  color: #52616f; /* Usa cinza azulado para texto secundario. */
+  font-size: 18px; /* Mantem leitura confortavel. */
+  font-weight: 700; /* Da presenca sem competir com o titulo. */
+  line-height: 1.5; /* Facilita leitura. */
+}
+
+/* Estiliza o formulario de cadastro. */
+.register-form {
+  display: grid; /* Empilha os campos de forma consistente. */
+  gap: 16px; /* Cria distancia entre inputs. */
+  padding: 30px; /* Garante respiro interno. */
+  background: #fff; /* Destaca o formulario do fundo. */
+  border: 1px solid rgba(16, 24, 32, 0.08); /* Adiciona contorno leve. */
+  border-radius: 14px; /* Usa raio moderno sem parecer exagerado. */
+  box-shadow: 0 22px 54px rgba(12, 35, 48, 0.12); /* Da profundidade suave ao card. */
+}
+
+/* Estiliza o titulo do formulario. */
+.register-form h2 {
+  margin: 0 0 4px; /* Aproxima o titulo dos campos. */
+  color: #101820; /* Mantem leitura forte. */
+  font-size: 28px; /* Cria hierarquia clara. */
+}
+
+/* Estiliza o link para quem ja tem conta. */
+.register-login-link {
+  justify-self: center; /* Centraliza o link no formulario. */
+  color: #16858c; /* Usa a cor principal suavizada. */
+  font-weight: 900; /* Faz o link parecer acao secundaria. */
+}
+
+/* Ajusta a pagina de cadastro para tablets e celulares. */
+@media (max-width: 860px) {
+  .register-page {
+    grid-template-columns: 1fr; /* Empilha texto e formulario em telas menores. */
+  }
+}

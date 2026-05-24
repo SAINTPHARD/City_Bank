@@ -33,26 +33,36 @@ button {
 
 .manager-shell {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 92px minmax(0, 1fr);
   min-height: 100vh;
+  transition: grid-template-columns 180ms ease;
+}
+
+.manager-shell:has(.manager-sidebar:hover),
+.manager-shell:has(.manager-sidebar:focus-within) {
+  grid-template-columns: 280px minmax(0, 1fr);
 }
 
 .manager-main {
   display: grid;
-  gap: 22px;
-  width: min(100%, 1320px);
+  gap: 18px;
+  width: min(100%, 1280px);
   margin: 0 auto;
-  padding: 28px;
+  padding: 28px 28px 32px;
 }
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.75fr);
-  gap: 22px;
+  grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.78fr);
+  gap: 18px;
 }
 
 .dashboard-grid--three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dashboard-grid--operations {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
 }
 
 .eyebrow {
@@ -67,7 +77,8 @@ button {
 @media (max-width: 1080px) {
   .manager-shell,
   .dashboard-grid,
-  .dashboard-grid--three {
+  .dashboard-grid--three,
+  .dashboard-grid--operations {
     grid-template-columns: 1fr;
   }
 }

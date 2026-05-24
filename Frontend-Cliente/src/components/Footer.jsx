@@ -1,1 +1,0 @@
-// Arquivo migrado para ./Footer/index.js. Pode ser removido.

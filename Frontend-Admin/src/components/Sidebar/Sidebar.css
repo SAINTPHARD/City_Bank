@@ -3,17 +3,20 @@
   top: 0;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
   height: 100vh;
-  padding: 28px 20px;
+  overflow: hidden;
+  padding: 24px 14px;
   color: #f8fbfa;
   background: #102f2b;
+  box-shadow: 18px 0 40px rgba(16, 47, 43, 0.12);
 }
 
 .manager-brand {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 248px;
 }
 
 .manager-brand span {
@@ -30,6 +33,16 @@
 .manager-brand strong,
 .manager-brand small {
   display: block;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.manager-sidebar:hover .manager-brand strong,
+.manager-sidebar:hover .manager-brand small,
+.manager-sidebar:focus-within .manager-brand strong,
+.manager-sidebar:focus-within .manager-brand small {
+  opacity: 1;
 }
 
 .manager-brand small,
@@ -43,17 +56,56 @@
 }
 
 .manager-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 4px solid transparent;
   border-radius: 8px;
-  padding: 12px 14px;
+  min-height: 44px;
+  padding: 10px 12px 10px 10px;
   color: #dcebe7;
   font-weight: 800;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.manager-nav a:hover,
-.manager-nav a.is-active {
+.manager-nav a:hover {
   color: #102f2b;
   background: #d8fff0;
+}
+
+.manager-nav a.is-active {
+  border-left-color: #4fd1a5;
+  color: #d8fff0;
+  background: rgba(216, 255, 240, 0.12);
+  font-weight: 900;
+}
+
+.manager-nav__icon {
+  display: grid;
+  flex: 0 0 34px;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: #102f2b;
+  background: rgba(216, 255, 240, 0.9);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.manager-nav a.is-active .manager-nav__icon {
+  background: #4fd1a5;
+}
+
+.manager-nav__label {
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.manager-sidebar:hover .manager-nav__label,
+.manager-sidebar:focus-within .manager-nav__label {
+  opacity: 1;
 }
 
 .manager-sidebar__summary {
@@ -64,16 +116,32 @@
   border-radius: 8px;
   padding: 16px;
   background: rgba(255, 255, 255, 0.08);
+  min-width: 224px;
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.manager-sidebar:hover .manager-sidebar__summary,
+.manager-sidebar:focus-within .manager-sidebar__summary {
+  opacity: 1;
 }
 
 @media (max-width: 1080px) {
   .manager-sidebar {
     position: static;
     height: auto;
+    padding: 18px;
   }
 
   .manager-nav {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .manager-brand strong,
+  .manager-brand small,
+  .manager-nav__label,
+  .manager-sidebar__summary {
+    opacity: 1;
   }
 }
 

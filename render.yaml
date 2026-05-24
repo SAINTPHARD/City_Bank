@@ -1,0 +1,44 @@
+services:
+  - type: static
+    name: citybank-cliente
+    rootDir: frontend-cliente
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://citybank-api.onrender.com/api
+
+  - type: static
+    name: citybank-admin
+    rootDir: frontend-admin
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  - type: web
+    name: citybank-api
+    runtime: java
+    plan: free
+    rootDir: backend
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/bank-api-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://citybank-api.onrender.com/api
+      - key: SPRING_PROFILES_ACTIVE
+        value: local
+      - key: JWT_SECRET
+        sync: false
+      - key: DB_URL
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false

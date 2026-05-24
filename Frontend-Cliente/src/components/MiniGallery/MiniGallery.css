@@ -1,0 +1,33 @@
+.mini-gallery {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 32px) 88px;
+}
+
+.app-gallery.compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 22px;
+  margin-top: 0;
+}
+
+.app-gallery.compact .app-card {
+  position: relative;
+  min-height: 150px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.app-gallery.compact .app-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.72);
+}
+
+.app-gallery.compact .app-card p,
+.app-gallery.compact .app-card a {
+  display: none;
+}

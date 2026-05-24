@@ -1,12 +1,14 @@
 import { accounts, approvals, kpis, portfolio, riskAlerts, teamActivities } from "./data/bankData"
-import { AccountTable } from "./components/AccountTable"
-import { ActivityFeed } from "./components/ActivityFeed"
-import { ApprovalQueue } from "./components/ApprovalQueue"
-import { Header } from "./components/Header"
-import { KpiCards } from "./components/KpiCards"
-import { PortfolioPanel } from "./components/PortfolioPanel"
-import { RiskPanel } from "./components/RiskPanel"
-import { Sidebar } from "./components/Sidebar"
+import { AccountTable } from "./components/AccountTable/AccountTable.js"
+import { ActivityFeed } from "./components/ActivityFeed/ActivityFeed.js"
+import { ApprovalQueue } from "./components/ApprovalQueue/ApprovalQueue.js"
+import { Header } from "./components/Header/Header.js"
+import { KpiCards } from "./components/KpiCards/KpiCards.js"
+import { ManagerLogin } from "./components/ManagerLogin/ManagerLogin.js"
+import { PortfolioPanel } from "./components/PortfolioPanel/PortfolioPanel.js"
+import { ReportCenter } from "./components/ReportCenter/ReportCenter.js"
+import { RiskPanel } from "./components/RiskPanel/RiskPanel.js"
+import { Sidebar } from "./components/Sidebar/Sidebar.js"
 import "./styles.css"
 
 function App() {
@@ -27,6 +29,11 @@ function App() {
           <RiskPanel alerts={riskAlerts} />
           <PortfolioPanel portfolio={portfolio} />
           <ActivityFeed activities={teamActivities} />
+        </section>
+
+        <section className="dashboard-grid dashboard-grid--operations">
+          <ReportCenter />
+          <ManagerLogin />
         </section>
       </main>
     </div>

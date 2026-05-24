@@ -32,26 +32,30 @@
 
 .account-table {
   display: grid;
-  gap: 10px;
+  gap: 0;
   overflow-x: auto;
 }
 
 .account-table__row {
   display: grid;
-  grid-template-columns: minmax(230px, 1.7fr) 0.8fr 1fr 0.55fr 0.7fr 0.75fr;
+  grid-template-columns: minmax(220px, 1.65fr) 0.78fr minmax(132px, 1fr) 0.54fr 0.66fr 0.72fr;
   align-items: center;
   gap: 14px;
-  min-width: 820px;
-  border: 1px solid #e2ebe7;
-  border-radius: 8px;
-  padding: 13px 14px;
-  background: #ffffff;
+  min-width: 760px;
+  border-bottom: 1px solid #e2ebe7;
+  padding: 13px 16px;
+  background: transparent;
+}
+
+.account-table__row:not(.account-table__row--head):hover {
+  background: #f7fbfa;
 }
 
 .account-table__row--head {
   border: 0;
+  border-bottom: 1px solid #d8e4df;
   padding-top: 0;
-  padding-bottom: 0;
+  padding-bottom: 10px;
   color: #5d6d68;
   background: transparent;
   font-size: 0.78rem;
@@ -62,6 +66,20 @@
 
 .account-table strong {
   font-weight: 900;
+}
+
+.account-table__amount {
+  justify-self: end;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.account-table__amount--in {
+  color: #00835f;
+}
+
+.account-table__amount--out {
+  color: #b42318;
 }
 
 .account-table small {
@@ -96,6 +114,26 @@
 }
 
 .status-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.status-badge--success {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.status-badge--error {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+.status-badge--pending {
+  color: #854d0e;
+  background: #fef3c7;
+}
+
+.status-badge--neutral {
   color: #1f4172;
   background: #edf4ff;
 }

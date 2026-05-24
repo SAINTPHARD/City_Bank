@@ -1,0 +1,15 @@
+.route-transition {
+  animation: routeFade 0.28s ease both;
+}
+
+@keyframes routeFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

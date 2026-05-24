@@ -1,0 +1,31 @@
+.ui-field {
+  display: grid;
+  gap: 7px;
+}
+
+.ui-field span {
+  color: #52616f;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.ui-field input {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 14px;
+  color: #101820;
+  background: #fff;
+  border: 1px solid #cbd5dc;
+  border-radius: 8px;
+  outline: 0;
+}
+
+.ui-field input:focus {
+  border-color: #16858c;
+  box-shadow: 0 0 0 4px rgba(22, 133, 140, 0.12);
+}
+
+.ui-field small {
+  color: #a31313;
+  font-weight: 800;
+}

@@ -1,0 +1,75 @@
+/* Estiliza a barra principal do Header. */
+.navbar {
+  position: sticky; /* Mantem o Header visivel no topo durante a rolagem. */
+  top: 0; /* Fixa o Header exatamente no topo da viewport. */
+  z-index: 50; /* Garante que o Header fique acima do conteudo da pagina. */
+  display: flex; /* Organiza logo, links e acoes em uma linha. */
+  align-items: center; /* Centraliza os itens verticalmente. */
+  gap: 30px; /* Cria respiro horizontal entre os grupos do Header. */
+  min-height: 68px; /* Mantem altura minima confortavel para clique. */
+  padding: 0 max(16px, calc((100vw - 1280px) / 2 + 20px)); /* Ajusta o espacamento lateral de forma responsiva. */
+  background: rgba(255, 255, 255, 0.96); /* Usa branco levemente translucido para parecer moderno. */
+  border-bottom: 1px solid rgba(16, 24, 32, 0.08); /* Separa o Header do conteudo sem pesar visualmente. */
+  backdrop-filter: blur(16px); /* Aplica vidro fosco quando ha conteudo rolando por baixo. */
+}
+
+/* Estiliza a marca do banco no Header. */
+.logo {
+  color: #0f5d66; /* Usa um teal mais suave para a identidade visual. */
+  font-size: 32px; /* Deixa a marca forte sem dominar o Header. */
+  font-weight: 900; /* Reforca presenca de marca. */
+  line-height: 1; /* Evita altura extra ao redor do texto. */
+}
+
+/* Agrupa os links principais e as acoes do Header. */
+.main-nav,
+.nav-actions {
+  display: flex; /* Mantem os itens em linha no desktop. */
+  align-items: center; /* Alinha os links pelo centro vertical. */
+  gap: 24px; /* Cria distancia consistente entre links. */
+}
+
+/* Faz o menu principal ocupar o espaco entre logo e acoes. */
+.main-nav {
+  flex: 1; /* Empurra login e cadastro para a direita. */
+}
+
+/* Padroniza links do menu e das acoes. */
+.main-nav a,
+.nav-actions a {
+  color: #101820; /* Mantem contraste alto para leitura. */
+  font-size: 15px; /* Usa tamanho compacto e profissional. */
+  font-weight: 800; /* Da peso visual sem parecer pesado demais. */
+  white-space: nowrap; /* Evita quebra de texto no Header desktop. */
+}
+
+/* Define o botao principal usado no Header. */
+.primary-pill {
+  display: inline-flex; /* Permite centralizar texto e icones se forem adicionados. */
+  align-items: center; /* Centraliza o conteudo na vertical. */
+  justify-content: center; /* Centraliza o conteudo na horizontal. */
+  min-height: 42px; /* Garante area clicavel adequada. */
+  padding: 0 22px; /* Da largura confortavel ao botao. */
+  color: #fff; /* Mantem o texto legivel sobre o fundo colorido. */
+  font-weight: 900; /* Destaca a acao principal. */
+  background: #16858c; /* Suaviza o teal anterior sem perder identidade bancaria. */
+  border: 0; /* Remove borda padrao do navegador. */
+  border-radius: 999px; /* Cria formato de pill moderno. */
+  box-shadow: 0 10px 22px rgba(22, 133, 140, 0.18); /* Adiciona profundidade suave. */
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; /* Suaviza interacoes. */
+}
+
+/* Define feedback visual ao passar o mouse no botao principal. */
+.primary-pill:hover {
+  background: #126f78; /* Escurece levemente para indicar interacao. */
+  box-shadow: 0 12px 26px rgba(18, 111, 120, 0.22); /* Aumenta a sombra de forma discreta. */
+  transform: translateY(-1px); /* Da sensacao de resposta ao clique. */
+}
+
+/* Esconde os itens desktop quando o layout vira mobile. */
+@media (max-width: 980px) {
+  .main-nav,
+  .nav-actions {
+    display: none; /* Evita duplicidade com o menu mobile. */
+  }
+}

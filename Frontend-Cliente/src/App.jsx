@@ -1,28 +1,28 @@
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import { useAuth } from "./contexts/useAuth.js";
 import "./App.css";
-import Header from "./components/Header/index.jsx";
-import MobileMenu from "./components/MobileMenu/index.jsx";
-import Hero from "./components/Hero";
-import ProductCards from "./components/ProductCards";
-import CardSection from "./components/CardSection";
-import AppGallery from "./components/AppGallery";
-import MiniGallery from "./components/MiniGallery";
-import NewsBand from "./components/NewsBand";
-import Footer from "./components/Footer/index.jsx";
+import Header from "./components/Header/Header.js";
+import MobileMenu from "./components/MobileMenu/MobileMenu.js";
+import Hero from "./components/Hero/Hero.js";
+import ProductCards from "./components/ProductCards/ProductCards.js";
+import CardSection from "./components/CardSection/CardSection.js";
+import AppGallery from "./components/AppGallery/AppGallery.js";
+import MiniGallery from "./components/MiniGallery/MiniGallery.js";
+import NewsBand from "./components/NewsBand/NewsBand.js";
+import Footer from "./components/Footer/Footer.js";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import axios from "axios";
+import Register from "./pages/Register";
+import RouteTransition from "./components/RouteTransition/RouteTransition.js";
+import apiClient from "./services/apiClient.js";
 import PropTypes from "prop-types";
 import linkedinLogo from "./assets/linkedin.svg";
 import youtubeLogo from "./assets/youtube.svg";
 import facebookLogo from "./assets/facebook.svg";
 import instagramLogo from "./assets/instagram-square.svg";
 import xLogo from "./assets/quadrado-x.svg";
-
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
 
 // Dados dos cards de produtos.
 // Cada objeto representa um card que sera renderizado na secao "momentos".
@@ -126,26 +126,31 @@ PrivateRoute.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-function AppContent() {
-  // ...existing code for productCards, appCards, footerColumns, socialLinks...
-
-  // Função de login integrada ao backend
+function AppRoutes() {
+  const location = useLocation();
+  const isDashboard = location.pathname.startsWith("/dashboard");
   const { login } = useAuth();
+
   const handleLogin = async (cpf, password, setError) => {
     try {
-      const response = await axios.post(`${apiBaseUrl}/auth/login`, { cpf, password });
+      const response = await apiClient.post("/auth/login", { cpf, password });
       login(response.data.user, response.data.token);
+      window.location.assign("/dashboard");
     } catch {
       setError("CPF ou senha inválidos");
     }
   };
 
   return (
-    <Router>
-        <div className="citybank-page">
-        <Header />
-        <MobileMenu />
+    <div className="citybank-page">
+      {!isDashboard && (
+        <>
+          <Header />
+          <MobileMenu />
+        </>
+      )}
         <main>
+          <RouteTransition>
           <Routes>
             <Route path="/" element={
               <>
@@ -157,6 +162,7 @@ function AppContent() {
                 <NewsBand />
               </>
             } />
+            <Route path="/cadastro" element={<Register />} />
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
             <Route path="/dashboard" element={
               <PrivateRoute>
@@ -164,9 +170,17 @@ function AppContent() {
               </PrivateRoute>
             } />
           </Routes>
+          </RouteTransition>
         </main>
-        <Footer footerColumns={footerColumns} socialLinks={socialLinks} />
+      {!isDashboard && <Footer footerColumns={footerColumns} socialLinks={socialLinks} />}
       </div>
+  );
+}
+
+function AppContent() {
+  return (
+    <Router>
+      <AppRoutes />
     </Router>
   );
 }

@@ -1,0 +1,73 @@
+/* Mantem o botao hamburger escondido no desktop. */
+.hamburger {
+  display: none; /* O menu mobile so aparece em telas menores. */
+}
+
+/* Mantem o menu lateral escondido no desktop. */
+.mobile-nav {
+  display: none; /* Evita duplicar os links abaixo do Header em telas grandes. */
+}
+
+/* Mantem o fundo escuro escondido enquanto o menu nao esta aberto. */
+.backdrop {
+  display: none; /* O backdrop so deve existir visualmente no mobile aberto. */
+}
+
+/* Ativa o comportamento mobile abaixo de 980px. */
+@media (max-width: 980px) {
+  .hamburger {
+    position: fixed; /* Mantem o botao acessivel enquanto a pagina rola. */
+    top: 18px; /* Posiciona o botao perto do topo. */
+    right: 20px; /* Posiciona o botao no canto direito. */
+    z-index: 40; /* Garante que fique acima do menu e do backdrop. */
+    display: inline-flex; /* Exibe as barras do hamburger em coluna. */
+    flex-direction: column; /* Empilha as tres barras verticalmente. */
+    gap: 4px; /* Cria separacao visual entre as barras. */
+    padding: 8px; /* Aumenta a area clicavel. */
+    background: #fff; /* Mantem contraste com o fundo. */
+    border: 0; /* Remove a borda padrao do botao. */
+    border-radius: 8px; /* Suaviza o formato do botao. */
+    box-shadow: 0 10px 24px rgba(16, 24, 32, 0.12); /* Cria destaque sobre o conteudo. */
+  }
+
+  .bar {
+    width: 24px; /* Define a largura de cada linha do icone. */
+    height: 3px; /* Define a espessura de cada linha do icone. */
+    background: #0f5d66; /* Usa a cor principal suavizada do projeto. */
+    border-radius: 999px; /* Arredonda as pontas das barras. */
+  }
+
+  .mobile-nav {
+    position: fixed; /* Transforma o menu em painel lateral. */
+    top: 0; /* Faz o painel nascer no topo da tela. */
+    right: 0; /* Ancora o painel no lado direito. */
+    z-index: 38; /* Mantem o menu acima do backdrop. */
+    display: flex; /* Exibe os links em coluna. */
+    width: min(82vw, 330px); /* Limita a largura para telas pequenas e medias. */
+    height: 100vh; /* Ocupa toda a altura da viewport. */
+    flex-direction: column; /* Empilha os links verticalmente. */
+    gap: 18px; /* Cria espaco confortavel entre links. */
+    padding: 86px 24px 24px; /* Abre espaco para o botao hamburger no topo. */
+    background: #fff; /* Usa fundo claro para leitura. */
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.16); /* Destaca o painel lateral. */
+    transform: translateX(105%); /* Deixa o painel fora da tela quando fechado. */
+    transition: transform 0.25s ease; /* Suaviza a abertura e fechamento. */
+  }
+
+  .mobile-nav.open {
+    transform: translateX(0); /* Traz o painel para dentro da tela quando aberto. */
+  }
+
+  .mobile-nav a {
+    color: #101820; /* Mantem leitura forte nos links. */
+    font-weight: 900; /* Facilita escaneamento no menu mobile. */
+  }
+
+  .backdrop {
+    position: fixed; /* Cobre a tela inteira por tras do menu. */
+    inset: 0; /* Expande o backdrop para todos os lados. */
+    z-index: 36; /* Posiciona o backdrop abaixo do menu. */
+    display: block; /* Exibe o backdrop apenas quando o React renderiza o elemento. */
+    background: rgba(0, 0, 0, 0.28); /* Escurece o conteudo para foco no menu. */
+  }
+}

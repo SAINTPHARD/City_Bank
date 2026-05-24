@@ -1,0 +1,68 @@
+.manager-login {
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 14px 30px rgba(18, 54, 47, 0.07);
+}
+
+.manager-login__form {
+  display: grid;
+  gap: 14px;
+}
+
+.manager-login__form label {
+  display: grid;
+  gap: 6px;
+}
+
+.manager-login__form label span {
+  color: #475851;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.manager-login__form input[type="text"],
+.manager-login__form input[type="password"] {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #d8e4df;
+  border-radius: 8px;
+  padding: 0 12px;
+  outline: 0;
+  background: #ffffff;
+}
+
+.manager-login__form input:focus {
+  border-color: #007565;
+  box-shadow: 0 0 0 3px rgba(0, 117, 101, 0.12);
+}
+
+.manager-login__options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.86rem;
+}
+
+.manager-login__options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.manager-login__options a {
+  color: #007565;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.manager-login__form button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #1f4172;
+  font-weight: 900;
+}
