@@ -1,8 +1,5 @@
-package com.citybank.api.exception;
+package com.citybank.api.infra.exception;
 
-/**
- * Exceção para regras de negócio violadas.
- */
 public class BusinessException extends RuntimeException {
     public BusinessException(String message) {
         super(message);

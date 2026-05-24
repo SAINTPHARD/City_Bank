@@ -1,45 +1,59 @@
+# O Blueprint do Render organiza múltiplos serviços (Full Stack) em um único arquivo de configuração.
 services:
-  - type: static
-    name: citybank-cliente
-    rootDir: frontend-cliente
+
+  # ---------------------------------------------------------------------------
+  # 1. SERVIÇO: FRONTEND DO CLIENTE (Aplicativo Web Estático)
+  # ---------------------------------------------------------------------------
+  - type: web_site  # Define que este serviço é um site estático (React/Vite)
+    name: citybank-cliente  # Nome do identificador do serviço no painel do Render
+    rootDir: frontend-cliente  # Pasta raiz onde estão os arquivos deste frontend
+    buildCommand: npm ci && npm run build  # Instala as dependências limpas e gera a build de produção
+    staticPublishPath: dist  # Pasta que o Vite gera após o build, contendo o HTML/JS final
+    routes:
+      - type: rewrite  # Garante que rotas do React Router (ex: /dashboard) funcionem sem dar Erro 404
+        source: /* # Captura qualquer rota digitada na barra de endereço
+        destination: /index.html  # Redireciona tudo para o ponto de entrada único do React
+    envVars:
+      - key: VITE_API_BASE_URL  # Variável de ambiente usada pelo Axios/Fetch no React
+        value: https://citybank-api.onrender.com/api  # URL de produção da sua API Spring Boot
+
+  # ---------------------------------------------------------------------------
+  # 2. SERVIÇO: FRONTEND DO ADMINISTRADOR (Painel Gerencial)
+  # ---------------------------------------------------------------------------
+  - type: web_site  # Define como site estático para o painel administrativo
+    name: citybank-admin  
+    rootDir: frontend-admin  # Aponta para a pasta específica do admin
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
     routes:
-      - type: rewrite
+      - type: rewrite  # Evita quebra de rotas internas no painel administrativo
         source: /*
         destination: /index.html
     envVars:
       - key: VITE_API_BASE_URL
         value: https://citybank-api.onrender.com/api
 
-  - type: static
-    name: citybank-admin
-    rootDir: frontend-admin
-    buildCommand: npm ci && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
+  # ---------------------------------------------------------------------------
+  # 3. SERVIÇO: BACKEND (API RESTful em Java + Spring Boot)
+  # ---------------------------------------------------------------------------
+  - type: web  # Tipo 'web' indica uma aplicação servidora que fica rodando continuamente
+    name: citybank-api  
+    runtime: java  # Define o ambiente de execução nativo para Java
+    plan: free  # Utiliza o plano gratuito do Render
+    rootDir: backend  # Pasta onde está o arquivo pom.xml e o código Java
+    buildCommand: ./mvnw clean package -DskipTests  # Executa o Maven Wrapper para compilar o projeto e gerar o .jar (pula os testes para agilizar o deploy)
+    startCommand: java -jar target/bank-api-0.0.1-SNAPSHOT.jar  # Comando que inicia a aplicação executando o arquivo JAR gerado
     envVars:
-      - key: VITE_API_BASE_URL
-        value: https://citybank-api.onrender.com/api
-
-  - type: web
-    name: citybank-api
-    runtime: java
-    plan: free
-    rootDir: backend
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar target/bank-api-0.0.1-SNAPSHOT.jar
-    envVars:
-      - key: SERVER_PORT
+      - key: SERVER_PORT  # Porta onde o Spring Boot vai escutar as requisições
         value: 10000
-      - key: JWT_SECRET
-        sync: false
+      
+      # Variáveis sensíveis configuradas como 'sync: false'.
+      # Isso obriga você a preencher os valores reais manualmente no painel do Render por segurança.
+      - key: JWT_SECRET  
+        sync: false  # Não tenta sincronizar um valor padrão pelo Git (evita expor a chave do token)
       - key: SPRING_DATASOURCE_URL
-        sync: false
+        sync: false  # URL de conexão com o banco de dados de produção (ex: PostgreSQL/MySQL remoto)
       - key: SPRING_DATASOURCE_USERNAME
-        sync: false
+        sync: false  # Usuário do banco de dados de produção
       - key: SPRING_DATASOURCE_PASSWORD
-        sync: false
+        sync: false  # Senha do banco de dados de produção
