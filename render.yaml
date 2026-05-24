@@ -1,58 +1,60 @@
-# O Blueprint do Render serve para orquestrar múltiplos servidores (Full Stack) usando um único arquivo.
+# O Blueprint do Render organiza múltiplos serviços (Full Stack) usando um único arquivo.
 services:
 
   # ===========================================================================
   # 1. SERVIÇO: FRONTEND DO CLIENTE (Site Estático React/Vite)
   # ===========================================================================
-  - type: static # Define que este serviço é um site estático (HTML/JS/CSS pré-compilados)
-    name: citybank-cliente # Nome único que aparecerá no painel de controle do Render
-    rootDir: frontend-cliente # Pasta no seu Git onde o Render deve entrar para rodar os comandos
-    buildCommand: npm ci && npm run build # Comando para instalar as dependências limpas (ci) e gerar a pasta de produção (build)
-    staticPublishPath: dist # Indica ao Render qual pasta o Vite gerou (geralmente 'dist') para publicar na internet
+  - type: web # Define como serviço web
+    env: static # Especifica que o ambiente é estático (HTML/JS/CSS do Vite)
+    name: citybank-cliente # Nome único no painel do Render
+    rootDir: frontend-cliente # Pasta no seu Git onde está este frontend
+    buildCommand: npm ci && npm run build # Instala dependências e gera a build de produção
+    staticPublishPath: dist # Pasta gerada pelo Vite para publicação
     routes:
-      - type: rewrite # Configuração de reescrita de rotas para Single Page Applications (SPA)
-        source: /* # Captura qualquer rota interna do app (ex: /dashboard, /transferir)
-        destination: /index.html # Redireciona tudo para o index.html para o React Router assumir o controle
+      - type: rewrite # Configuração para evitar Erro 404 no React Router
+        source: /*
+        destination: /index.html 
     envVars:
-      - key: VITE_API_BASE_URL # Nome da variável que o Axios ou Fetch usa no React para achar o backend
-        value: https://citybank-api.onrender.com/api # URL definitiva onde a sua API Java estará rodando
+      - key: VITE_API_BASE_URL 
+        value: https://citybank-api.onrender.com/api # URL da sua API Java
 
   # ===========================================================================
   # 2. SERVIÇO: FRONTEND DO ADMINISTRADOR (Painel Gerencial Estático)
   # ===========================================================================
-  - type: static # Também é um site estático compilado pelo Vite
-    name: citybank-admin # Identificador único do painel administrativo no Render
-    rootDir: frontend-admin # Pasta no seu repositório Git correspondente ao admin
-    buildCommand: npm ci && npm run build # Instala pacotes do Node e compila o código do painel
-    staticPublishPath: dist # Pasta onde ficam os arquivos finais após a compilação do Vite
+  - type: web # Define como serviço web
+    env: static # Especifica que o ambiente é estático
+    name: citybank-admin 
+    rootDir: frontend-admin # Pasta no seu Git onde está o admin
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
     routes:
-      - type: rewrite # Evita o famoso erro "404 Not Found" ao atualizar páginas de administração no navegador
-        source: /* # Mapeia todas as sub-rotas do painel
-        destination: /index.html # Envia o tráfego de volta para o ponto de entrada do React
+      - type: rewrite 
+        source: /*
+        destination: /index.html
     envVars:
-      - key: VITE_API_BASE_URL # A API do admin também se conecta ao mesmo backend central
+      - key: VITE_API_BASE_URL
         value: https://citybank-api.onrender.com/api
 
   # ===========================================================================
   # 3. SERVIÇO: BACKEND (API RESTful Java com Spring Boot)
   # ===========================================================================
-  - type: web # Tipo 'web' indica uma aplicação servidora ativa que escuta requisições HTTP continuamente
-    name: citybank-api # Nome identificador da sua API no painel do Render
-    runtime: java # Configura o contêiner do Render com o ambiente de execução nativo do Java
-    plan: free # Define que o serviço usará o plano gratuito da plataforma
-    rootDir: backend # Pasta no repositório Git onde estão localizados o pom.xml e a pasta /src do Java
-    buildCommand: ./mvnw clean package -DskipTests # Executa o Maven Wrapper para limpar builds antigos e empacotar a API num arquivo .jar (pula os testes para acelerar o deploy)
-    startCommand: java -jar target/bank-api-0.0.1-SNAPSHOT.jar # Comando de inicialização que roda o arquivo JAR gerado pelo Maven na pasta target
+  - type: web # Tipo 'web' para aplicação servidora contínua (Java)
+    name: citybank-api 
+    runtime: java # Ambiente nativo Java
+    plan: free 
+    rootDir: backend # Pasta no Git onde está a API Java
+    buildCommand: ./mvnw clean package -DskipTests # Compila e gera o .jar
+    startCommand: java -jar target/bank-api-0.0.1-SNAPSHOT.jar # Inicia a aplicação
     envVars:
-      - key: SERVER_PORT # Define qual porta o servidor Tomcat embutido do Spring Boot vai abrir
-        value: 10000 # Porta padrão comumente escutada no Render
+      - key: SERVER_PORT 
+        value: 10000 
       
-      # PROPRIEDADES DE SEGURANÇA E BANCO DE DADOS (Configuradas manualmente por segurança)
-      - key: JWT_SECRET # Chave secreta usada para assinar e validar os tokens de login do banco
-        sync: false # 'false' avisa ao Render para não colocar valor padrão aqui e esperar você preencher no painel
-      - key: SPRING_DATASOURCE_URL # Endereço de conexão (String de Conexão) do seu banco de dados de produção
-        sync: false # Protege o link do seu banco contra vazamentos no GitHub
-      - key: SPRING_DATASOURCE_USERNAME # Nome do usuário administrador do banco de dados na nuvem
-        sync: false # Mantém o usuário seguro oculto do código-fonte
-      - key: SPRING_DATASOURCE_PASSWORD # Senha secreta de acesso ao banco de dados na nuvem
-        sync: false # Proteção máxima para que ninguém no GitHub tenha acesso aos dados do banco
+      # PROPRIEDADES DE SEGURANÇA (Configuradas manualmente no painel do Render)
+      - key: JWT_SECRET 
+        sync: false 
+      - key: SPRING_DATASOURCE_URL 
+        sync: false 
+      - key: SPRING_DATASOURCE_USERNAME 
+        sync: false 
+      - key: SPRING_DATASOURCE_PASSWORD 
+        sync: false
